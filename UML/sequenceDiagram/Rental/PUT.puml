@@ -1,0 +1,23 @@
+@startuml Manage Rental (PUT)
+
+header Rental Car Booking Sequence Diagram
+footer Page %page% of %lastpage%
+title "Manage Rental (PUT)"
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:rentals" as routerRentals
+participant "<<controllers>>\n:rentals" as controllersRentals
+participant "<<model>>\n:Rental" as modelRental
+database "<<MongoDB>>\n:rentals" as RentalsDatabase
+
+client->server ++:req.put('/rentals/:id')
+server->routerRentals ++:app.use('/rentals',rentals)
+routerRentals -> controllersRentals ++:updateRental()
+controllersRentals->modelRental ++:findByIdAndUpdate(req.params.id, req.body)
+modelRental ->RentalsDatabase ++: RentalSchema
+RentalsDatabase --> modelRental --: rental
+controllersRentals <-- modelRental --:rental
+controllersRentals->client --:response
+
+@enduml

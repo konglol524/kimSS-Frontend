@@ -1,0 +1,83 @@
+@startuml
+left to right direction
+package "Rental Car Booking"{
+    class "<<Application>>\nRentalCarBookingService" as RentalCarBookingService{}
+
+    class "<<Resource>>\nRentals" as ResourceRentals{
+        <<GET>> +getRentals():Rental
+        <<POST>> +addRental():Rental
+    }
+
+    class "<<Resource>>\nRental" as ResourceRental {
+        <<GET>> +getRental(): Rental
+        <<PUT>> +updateRental(): Rental
+        <<DELETE>> +deleteRental(): void
+    }
+
+    class "<<Representation>>\nRental" as RepresentationRental {
+        -name
+        -address
+        -cost
+        -tel
+    }
+
+    class "<<Resource>>\nBookings" as ResourceBookings{
+        <<GET>> +getBookings():Bookings
+        <<POST>> +addBooking():Booking
+    }
+
+    class "<<Resource>>\nBooking" as ResourceBooking {
+        <<GET>> +getBooking(): Booking
+        <<PUT>> +updateBooking(): Booking
+        <<DELETE>> +deleteBooking(): void
+    }
+
+    class "<<Representation>>\nBooking" as RepresentationBooking {
+        -bookingDate
+        -user
+        -car
+        -daySpend
+        -rentalProvider
+        -createdAt
+    }
+
+    class "<<Resource>>\nAuth" as ResourceAuth {
+        <<POST>> +register(): token
+        <<POST>> +login(): token
+        <<GET>> +getMe(): User
+        <<GET>> +logout(): void
+    }
+    
+    class "<<Resource>>\nUser" as ResourceDeleteUser {
+        <<DELETE>> +deleteUser(): void
+    }
+
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -telephone
+        -email
+        -role
+        -password
+        -createdAt
+    }
+
+}
+
+RentalCarBookingService ..> ResourceRentals:"/rentals\n<<Path>>"
+ResourceRentals ..> ResourceRental: "/{rentalId}\n<<Path>>"
+ResourceRental ..> RepresentationRental: "<<use>>"
+
+RentalCarBookingService ..> ResourceBookings:"/bookings\n<<Path>>"
+ResourceBookings ..> ResourceBooking: "/{bookingId}\n<<Path>>"
+ResourceBooking ..> RepresentationBooking: "<<use>>"
+
+RentalCarBookingService ..> ResourceAuth: "/auth/register\n<<Path>>"
+RentalCarBookingService ..> ResourceAuth: "/auth/login\n<<Path>>"
+RentalCarBookingService ..> ResourceAuth: "/auth/me\n<<Path>>"
+RentalCarBookingService ..> ResourceAuth: "/auth/logout\n<<Path>>"
+RentalCarBookingService ..> ResourceDeleteUser: "/auth/{userId}\n<<Path>>"
+ResourceAuth ..> RepresentationUser: "<<use>>"
+ResourceDeleteUser ..> RepresentationUser: "<<use>>"
+ResourceDeleteUser ..> RepresentationBooking: "<<use>>"
+
+@enduml
