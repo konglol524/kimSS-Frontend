@@ -102,6 +102,9 @@ exports.addBooking = async (req, res, next) => {
 
     const booking = await Booking.create(req.body);
 
+    const newPoint = req.user.point + req.body.addedPoint;
+    req.user.point = newPoint;
+
     res.status(201).json({
       success: true,
       data: booking,
