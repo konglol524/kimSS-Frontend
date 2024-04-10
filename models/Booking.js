@@ -23,6 +23,14 @@ const BookingSchema = new mongoose.Schema({
     ref: "Rental",
     required: true,
   },
+  discountPoint : {
+    type: Number,
+    default: 0,
+  },
+  cost : {
+    type: Number,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

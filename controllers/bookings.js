@@ -1,5 +1,6 @@
 const Booking = require("../models/Booking");
 const Rental = require("../models/Rental");
+const User = require("../models/User");
 
 exports.getBookings = async (req, res, next) => {
   let query;
@@ -106,6 +107,8 @@ exports.addBooking = async (req, res, next) => {
       success: true,
       data: booking,
     });
+    
+    const user = await User.findByIdAndUpdate(req.user.id, {point: req.user.point - req.body.discountPoint})
   } catch (error) {
     console.log(error.stack);
     return res
