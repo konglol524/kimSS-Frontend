@@ -1,5 +1,6 @@
 const Booking = require("../models/Booking");
 const Rental = require("../models/Rental");
+const User = require("../models/User");
 
 exports.getBookings = async (req, res, next) => {
   let query;
@@ -89,6 +90,8 @@ exports.addBooking = async (req, res, next) => {
     //add user Id to req.body
     req.body.user = req.user.id;
 
+    console.log(req.body);
+
     //Check for existed booking
     const existedBookings = await Booking.find({ user: req.user.id });
 
@@ -102,9 +105,21 @@ exports.addBooking = async (req, res, next) => {
 
     const booking = await Booking.create(req.body);
 
+    const newPoint = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        point: req.user.point + req.body.addedPoint,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
     res.status(201).json({
       success: true,
       data: booking,
+      point: newPoint.point,
     });
   } catch (error) {
     console.log(error.stack);
