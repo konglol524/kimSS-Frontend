@@ -10,10 +10,10 @@ const BookingSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  car : {
+  car: {
     type: String,
-    default: 'Ferrari 488'
-  }, 
+    default: "Ferrari 488",
+  },
   daySpend: {
     type: Number,
     default: 1,
@@ -35,7 +35,10 @@ const BookingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  
+  addedPoint: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);

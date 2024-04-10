@@ -1,5 +1,11 @@
 const express = require("express");
-const { register, login, getMe, logout, deleteUser} = require("../controllers/auth");
+const {
+  register,
+  login,
+  getMe,
+  logout,
+  deleteUser,
+} = require("../controllers/auth");
 const router = express.Router();
 const { protect, authorize } = require("../middleware/auth");
 
