@@ -20,6 +20,8 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
     const [ selectedShop, setSelectedShop ] = useState<string>(shopParam?shopParam:'None');
     const [ daySpend, setDaySpend ] = useState<number>(0);
 
+    const currentCostPerDay = shops.data.find((rental:rentalProvider)=>rental._id === selectedShop )?.cost || 0;
+
     const router = useRouter();
 
     const submitReservation = async (e:FormEvent<HTMLFormElement>) => {
@@ -90,7 +92,7 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
 
     return (
         <>
-            <div className="relative items-center bg-base-100 h-[480px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
+            <div className="relative items-center bg-base-100 h-[550px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
                 <form onSubmit={(e)=>submitReservation(e)} className="pt-[35px] h-full">
                     <table className="w-full">
                         <tbody>
@@ -112,6 +114,16 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
                             <td className="text-left pl-5"><div className="text-xl font-bold ml-5">Days Duration</div></td>
                             <td className="p-[15px]">
                                 <input min={1} type="number" className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid" onChange={(e)=>setDaySpend(parseInt(e.target.value))}/>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td className="text-left pl-5"><div className="text-xl font-bold ml-5">Total Cost</div></td>
+                            <td className="p-[15px] ">
+                                <div className="text-xl text-center w-full items-center flex justify-center rounded-md h-[1.75em]">
+                                    {
+                                        (currentCostPerDay * daySpend).toLocaleString()
+                                    } Baht
+                                </div>
                             </td>
                             </tr>
                         </tbody>
