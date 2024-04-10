@@ -1,7 +1,7 @@
 'use client'
 
 import dayjs, { Dayjs } from "dayjs";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState , useEffect } from "react";
 import ShopSelect from "./ShopSelect";
 import CarSelect from "./CarSelect";
 import DateReserve from "./DateReserve";
@@ -9,6 +9,7 @@ import { TextField } from "@mui/material";
 import addBooking from "@/libs/addBooking";
 import ReservationResult from "./ReservationResult";
 import { useRouter, useSearchParams } from "next/navigation";
+import getUserProfile from "@/libs/getUserProfile";
 
 export default function BookingForm({user, shops, cars, bookingsAmount}:{user:any, shops:rentals, cars:Array<Car>, bookingsAmount:number}) {
     const urlParams = useSearchParams();
@@ -22,11 +23,23 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
     const [ selectedShop, setSelectedShop ] = useState<string>(shopParam?shopParam:'None');
     const [ daySpend, setDaySpend ] = useState<number>(0);
     const [ discount,setDiscount] = useState<number>(0);
+    const [newUser, setNewUser] = useState<any>(user);
+    const [submit, setSubmit] = useState<boolean>(true);
 
     const currentCostPerDay = shops.data.find((rental:rentalProvider)=>rental._id === selectedShop )?.cost || 0;
 
     const router = useRouter();
-    const maxDiscount = 5;
+    
+    
+
+    useEffect(()=>{
+        const getUser = async ()=>{
+            const myUser = await getUserProfile(user.token);
+            setNewUser(myUser);
+            console.log(myUser);
+        }
+        getUser();
+    },[submit])
 
     const submitReservation = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -49,7 +62,7 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
                 addedPoint: 20,
                 cost: estimatedCost
             })
-                
+            setSubmit(!submit);    
             handleSubmitResponse({...responseData, text: "Created reservation successfully"})
         } else {
             handleSubmitResponse({success: false, text: "Failed to create reservation"});
@@ -138,8 +151,8 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
                             <tr>
                             <td className="text-left pl-5"><div className="text-xl font-bold ml-5">Discount</div></td>
                             <td className="p-[15px] ">
-                            <label htmlFor="discount">Your point is : ....</label>
-                            <input  min={0} type="number" id="discount" className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid" onChange={(e)=>setDiscount(parseInt(e.target.value))}/>
+                            <label htmlFor="discount">{`Your point is : ${newUser.data.point}`}</label>
+                            <input  min={0} max={newUser.data.point} type="number" id="discount" className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid" onChange={(e)=>setDiscount(parseInt(e.target.value))}/>
                             </td>
                             </tr>
                             <tr>
