@@ -105,24 +105,28 @@ exports.addBooking = async (req, res, next) => {
 
     const booking = await Booking.create(req.body);
 
+    let userPoint = req.user.point;
+    userPoint += req.body.addedPoint;
+
     const newPoint = await User.findByIdAndUpdate(
       req.user.id,
       {
-        point: req.user.point + req.body.addedPoint,
+        point: userPoint,
       },
       {
         new: true,
         runValidators: true,
       }
     );
+    console.log(newPoint.point)
 
     res.status(201).json({
       success: true,
       data: booking,
       point: newPoint.point,
     });
-    
-    const user = await User.findByIdAndUpdate(req.user.id, {point: req.user.point - req.body.discountPoint})
+    console.log(req.body.discountPoint)
+    const user = await User.findByIdAndUpdate(req.user.id, {point: userPoint - req.body.discountPoint})
   } catch (error) {
     console.log(error.stack);
     return res
