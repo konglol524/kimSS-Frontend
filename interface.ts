@@ -16,6 +16,9 @@ interface Booking {
   car: string;
   daySpend: number;
   rentalProvider: rentalProvider;
+  discountPoint: number;
+  cost: number;
+  addedPoint: number;
   createdAt: string;
 }
 interface rentals {
