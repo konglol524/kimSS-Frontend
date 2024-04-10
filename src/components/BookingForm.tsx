@@ -26,7 +26,6 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
     const currentCostPerDay = shops.data.find((rental:rentalProvider)=>rental._id === selectedShop )?.cost || 0;
 
     const router = useRouter();
-    const maxDiscount = 5;
 
     const submitReservation = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -98,9 +97,11 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
             router.refresh();
         }, 3000); // Adjust this duration as needed
     }
+    const maxDiscount = Math.min(user.data.point,((currentCostPerDay * daySpend)/10));
 
     return (
         <>
+        
             <div className="relative items-center bg-base-100 h-[660px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
                 <form onSubmit={(e)=>submitReservation(e)} className="pt-[35px] h-full">
                     <table className="w-full">
@@ -138,8 +139,11 @@ export default function BookingForm({user, shops, cars, bookingsAmount}:{user:an
                             <tr>
                             <td className="text-left pl-5"><div className="text-xl font-bold ml-5">Discount</div></td>
                             <td className="p-[15px] ">
-                            <label htmlFor="discount">Your point is : ....</label>
-                            <input  min={0} type="number" id="discount" className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid" onChange={(e)=>setDiscount(parseInt(e.target.value))}/>
+                            <label htmlFor="discount">Your point is :</label>
+                            {
+                                user.data.point+"        "
+                            } 
+                            <input  min={0} max={maxDiscount} type="number" id="discount" className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid" onChange={(e)=>setDiscount(parseInt(e.target.value))}/>
                             </td>
                             </tr>
                             <tr>
