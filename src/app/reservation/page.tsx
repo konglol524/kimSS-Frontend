@@ -17,6 +17,8 @@ export default async function Reservation() {
   if (!session || !session?.user.data._id) return null;
 
   const bookings:Bookings = await getBookings(session?.user.token);
+
+  console.log(session.user.data)
   
   //Created Reservation Successfully
 

@@ -6,8 +6,10 @@ declare module "next-auth" {
       data: {
         _id: string;
         name: string;
+        telephone: string;
         email: string;
-        role: string;        
+        role: string;
+        point: number;
       }
 
       token: string;
