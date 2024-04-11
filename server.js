@@ -17,6 +17,7 @@ connectDB();
 const rentals = require("./routes/rentals");
 const auth = require("./routes/auth");
 const bookings = require("./routes/bookings");
+const upload = require("./routes/upload");
 
 var corsOptions = {
   origin: process.env.HOST,
@@ -52,6 +53,7 @@ app.use(hpp());
 app.use("/api/v1/rentals", rentals);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/bookings", bookings);
+app.use("/api/v1/upload", upload)
 
 //Cookie parser
 app.use(cookieParser());
