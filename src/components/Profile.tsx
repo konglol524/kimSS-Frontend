@@ -41,7 +41,8 @@ export default function Profile(  {pfp, session, updateImage}: {pfp:string, sess
                 }
                 const file = e.target.files[0];
                 const base64 = await convertToBase64(file);
-
+                
+                
                 if(typeof base64 === 'string'){
                     let image = document.createElement("img");
                     image.src = base64;
@@ -59,14 +60,15 @@ export default function Profile(  {pfp, session, updateImage}: {pfp:string, sess
                       if(!new_image_url){
                         return;
                       }
+                      setImage(new_image_url);
                       const result = await uploadProfile(session.user.token, new_image_url);    
                       console.log(result);     
 
                     }
                     
                 }
-                const newImage = await updateImage();
-                setImage(newImage.data.profilePic);
+                // const newImage = await updateImage();
+                // setImage(newImage.data.profilePic);
 
             }}
         />
