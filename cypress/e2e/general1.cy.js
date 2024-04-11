@@ -1,5 +1,3 @@
-
- 
 describe('Homepage', () => {
     beforeEach(()=>{
         cy.visit('http://localhost:3000')
@@ -11,8 +9,8 @@ describe('Homepage', () => {
         cy.get('h3').should('contain.text', 'Come rent your car today')
     })
 
-    it('should contain seven links', ()=>{
-        cy.get('a').should('have.length', 7);
+    it('should contain six links', ()=>{
+        cy.get('a').should('have.length', 6);
     })
 
     it('should contain link to Cars page', ()=>{
