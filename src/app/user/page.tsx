@@ -2,25 +2,33 @@ import { authOptions } from "@/libs/auth";
 import getBookings from "@/libs/getBookings";
 import getUserProfile from "@/libs/getUserProfile";
 import { getServerSession } from "next-auth";
-import { Avatar } from "@mui/material"
-import Image from "next/image";
 
 import BookingList from "@/components/BookingList";
 import dayjs from "dayjs";
 import Loading from "../../components/CustomLoading";
 import { Suspense } from "react";
+import Profile from "@/components/Profile";
+import getProfilePicture from "@/libs/getProfilePicture";
+
 
 
 export default async function user() {
   const session = await getServerSession(authOptions);
-  var profile, createdAt, bookings: Bookings;
+  var profile, createdAt, pfp, bookings: Bookings;
 
   if (!session) {
     // console.log(session);
     return;
   }
-  bookings = await getBookings(session?.user.token);
+  bookings = await getBookings(session.user.token);
   profile = await getUserProfile(session.user.token);
+  pfp = await getProfilePicture(session.user.token);
+
+  const updateImage = async ()=>{
+    "use server"
+    return await getProfilePicture(session.user.token);
+  }
+
   createdAt = new Date(profile.data.createdAt);
 
   // console.log(profile.data)
@@ -33,17 +41,8 @@ export default async function user() {
             <div className="card w-96 bg-base-100 shadow-xl border-2 border-solid border-base-800 ">
               <div className="card-body">
                 <h2 className="card-title">{profile.data.name}</h2>
-                <label htmlFor="file-upload">
-                  <Avatar alt="Profile picture" src={profile.data.profilePic || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
-                  <input
-                      id="file-upload"
-                      type="file"
-                      name="myFile"
-                      accept=".jpeg, .png, .jpg, .webp"
-                      className="hidden"
-                    />
-                </label>
-                {!profile.data.profilePic && <h2 className=" font-bold">[Click icon to upload profile picture]</h2>}
+                <Profile session={session} pfp={pfp.data.profilePic} updateImage={updateImage}/>
+                {!pfp && <h2 className=" font-bold">[Click icon to upload profile picture]</h2>}
                 <table className="border-separate table-auto border-spacing-2  ">
                   <tbody>
                     
