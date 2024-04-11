@@ -188,10 +188,10 @@ export default function BookingForm({
     }, 3000); 
   };
 
-  const maxDiscount = Math.min(
+  const maxDiscount = Math.ceil(Math.min(
     newUser.data.point, 
     (currentCostPerDay * daySpend) / 10
-  );
+  )) ;
 
   return (
     <>
@@ -292,10 +292,10 @@ export default function BookingForm({
                       </span>
                       {discount > 0 && (
                         <span className="text-red-500 font-bold">
-                          {(
+                          {Math.max(0,(
                             currentCostPerDay * daySpend -
                             discount * 10
-                          ).toLocaleString() + " "}
+                          )).toLocaleString() + " "}
                           Baht
                         </span>
                       )}
