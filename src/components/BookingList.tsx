@@ -139,7 +139,7 @@ export default function BookingList({
                   <th className="text-sm">bookingDate</th>
                   <th className="text-sm">daySpend</th>
                   <th className="text-sm">Provider</th>
-                  <th className="text-sm">Cost</th>
+                  <th className="text-sm">Cost Per Day</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,7 +228,7 @@ export default function BookingList({
                               name="Provider"
                               className="px-4 py-2 border-2 rounded-md focus:outline-none focus:border-blue-500 bg-black text-white"
                             />
-                            <label>Cost</label>
+                            <label>Cost Per Day</label>
                             <input
                               min={0}
                               value={
