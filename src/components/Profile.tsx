@@ -26,8 +26,20 @@ export default function Profile(  {pfp, session, updateImage}: {pfp:string, sess
       
       // console.log(pfp);
       return(
+        <div className="w-[220px] h-[220px] mx-auto flex justify-center items-center ">
+        
         <label htmlFor="file-upload">
-        <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
+        <div className="w-[300px] h-[300px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute top-8 right-10 z-30"></div> 
+
+            <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200}}>
+                
+             </Avatar>
+
+        {/* <Avatar src="./img/LeagueBorder1.png" sx={{ width: 220, height: 220 }} variant="square" >
+         <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200}}/>
+        </Avatar>  */}
+        
+         {/* <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> */}
         <input
             id="file-upload"
             type="file"
@@ -72,7 +84,9 @@ export default function Profile(  {pfp, session, updateImage}: {pfp:string, sess
 
             }}
         />
-        </label>        
+        </label>     
+        
+        </div>   
       )
 
 }
