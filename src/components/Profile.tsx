@@ -5,6 +5,7 @@ import uploadProfile from "@/libs/uploadProfile";
 
 export default function Profile(  {profile, session}: {profile:any, session:any}){
 
+    const WIDTH = 200;
     const convertToBase64 = (file:File)=>{
         return new Promise ((resolve, reject)=> {
           const fileReader = new FileReader();
@@ -35,12 +36,29 @@ export default function Profile(  {profile, session}: {profile:any, session:any}
                     return
                 }
                 const file = e.target.files[0];
-                // console.log(file);
                 const base64 = await convertToBase64(file);
-                // console.log(base64);
+
                 if(typeof base64 === 'string'){
-                    const result = await uploadProfile(session.user.token, base64);  
-                    console.log(result);              
+                    let image = document.createElement("img");
+                    image.src = base64;
+                    image.onload = async ({target}) => {
+                      let canvas = document.createElement("canvas");
+                      if(!target){
+                        return;
+                      }
+                      let ratio = WIDTH / (target as HTMLCanvasElement).width;
+                      canvas.width = WIDTH;
+                      canvas.height = (target as HTMLCanvasElement).height * ratio;
+                      const context = canvas.getContext("2d");
+                      context?.drawImage(image, 0, 0, canvas.width, canvas.height);
+                      let new_image_url = context?.canvas.toDataURL("image/jpeg", 60);
+                      if(!new_image_url){
+                        return;
+                      }
+                      const result = await uploadProfile(session.user.token, new_image_url);    
+                      console.log(result);                         
+                    }
+          
                 }
             }}
         />
