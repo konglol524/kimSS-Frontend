@@ -59,6 +59,10 @@ export default async function user() {
                       <td>Member Since :</td>
                       <td>{dayjs(createdAt?.toString()).format("DD/MM/YYYY")}</td>
                     </tr>
+                    <tr>
+                      <td>Point. :</td>
+                      <td>{profile.data.point}</td>
+                    </tr>
                   </tbody>
                 </table>
                 <div className="card-actions justify-end">
