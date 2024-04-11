@@ -43,7 +43,7 @@ export default async function user() {
                       className="hidden"
                     />
                 </label>
-                {!profile.data.profilePic && <h2 className=" font-bold">Click icon to upload profile picture</h2>}
+                {!profile.data.profilePic && <h2 className=" font-bold">[Click icon to upload profile picture]</h2>}
                 <table className="border-separate table-auto border-spacing-2  ">
                   <tbody>
                     
@@ -60,7 +60,7 @@ export default async function user() {
                       <td>{dayjs(createdAt?.toString()).format("DD/MM/YYYY")}</td>
                     </tr>
                     <tr>
-                      <td>Point. :</td>
+                      <td>Points :</td>
                       <td>{profile.data.point}</td>
                     </tr>
                   </tbody>

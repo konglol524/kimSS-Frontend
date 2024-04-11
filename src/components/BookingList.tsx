@@ -265,7 +265,7 @@ export default function BookingList({
                           {item.rentalProvider.name}
                         </td>
                         <td className="whitespace-nowrap">
-                          {item.rentalProvider.cost}
+                          {item.cost}
                         </td>
                       </>
                     )}
