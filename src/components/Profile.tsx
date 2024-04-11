@@ -3,7 +3,7 @@
 import { Avatar } from "@mui/material"
 import uploadProfile from "@/libs/uploadProfile";
 
-export default function Profile(  {profile, session}: {profile:any, session:any}){
+export default function Profile(  {pfp, session}: {pfp:string, session:any}){
 
     const WIDTH = 200;
     const convertToBase64 = (file:File)=>{
@@ -20,10 +20,11 @@ export default function Profile(  {profile, session}: {profile:any, session:any}
           }      
         })
       }
-    
+      
+      // console.log(pfp);
       return(
         <label htmlFor="file-upload">
-        <Avatar alt="Profile picture" src={profile.data.profilePic || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
+        <Avatar alt="Profile picture" src={pfp || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
         <input
             id="file-upload"
             type="file"
