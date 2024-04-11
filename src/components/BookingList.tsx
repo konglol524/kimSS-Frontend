@@ -244,7 +244,10 @@ export default function BookingList({
                             />
                             <label>Total Cost (after discount)</label>
                             <input
-                              value={item.cost}
+                              value={
+                                item.daySpend * item.rentalProvider.cost -
+                                10 * item.discountPoint
+                              }
                               className="px-4 py-2 border-2 rounded-md focus:outline-none focus:border-blue-500  bg-black text-white"
                             />
                           </div>
