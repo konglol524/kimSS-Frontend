@@ -8,11 +8,12 @@ export default async function uploadProfile(
     method: "PUT",
     url: `${process.env.BACKEND_URL}/api/v1/upload/profile`,
     headers: {
-      authorization: `Bearer ${token}`,
+      authorization : `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
-    data: JSON.stringify({
-        pic: "lolhbibibibibibibibib",
-    }),
+    data: JSON.stringify(
+     { pic: data }
+    ),
     
   });
 
