@@ -2,8 +2,11 @@
 
 import { Avatar } from "@mui/material"
 import uploadProfile from "@/libs/uploadProfile";
+import { useState } from "react";
 
-export default function Profile(  {pfp, session}: {pfp:string, session:any}){
+export default function Profile(  {pfp, session, updateImage}: {pfp:string, session:any, updateImage: Function}){
+    
+  const [image, setImage] = useState(pfp);
 
     const WIDTH = 200;
     const convertToBase64 = (file:File)=>{
@@ -24,7 +27,7 @@ export default function Profile(  {pfp, session}: {pfp:string, session:any}){
       // console.log(pfp);
       return(
         <label htmlFor="file-upload">
-        <Avatar alt="Profile picture" src={pfp || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
+        <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> 
         <input
             id="file-upload"
             type="file"
@@ -57,10 +60,14 @@ export default function Profile(  {pfp, session}: {pfp:string, session:any}){
                         return;
                       }
                       const result = await uploadProfile(session.user.token, new_image_url);    
-                      console.log(result);                         
+                      console.log(result);     
+
                     }
-          
+                    
                 }
+                const newImage = await updateImage();
+                setImage(newImage.data.profilePic);
+
             }}
         />
         </label>        
