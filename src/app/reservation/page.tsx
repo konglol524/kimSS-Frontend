@@ -18,7 +18,7 @@ export default async function Reservation() {
 
   const bookings:Bookings = await getBookings(session?.user.token);
 
-  console.log(session.user.data)
+  //console.log(session.user.data)
   
   //Created Reservation Successfully
 

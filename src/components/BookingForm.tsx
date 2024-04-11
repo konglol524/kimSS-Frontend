@@ -48,6 +48,14 @@ export default function BookingForm({
   const router = useRouter();
 
   useEffect(() => {
+    setDiscount(0);
+  }, [selectedShop]);
+  
+  useEffect(() => {
+    setDiscount(0);
+  }, [daySpend]);
+
+  useEffect(() => {
     const fetchUserProfile = async () => {
       try {
         const updatedUser = await getUserProfile(user.token); 
