@@ -4,7 +4,7 @@ import { Avatar } from "@mui/material"
 import uploadProfile from "@/libs/uploadProfile";
 import { useState } from "react";
 
-export default function Profile(  {pfp, session, updateImage}: {pfp:string, session:any, updateImage: Function}){
+export default function Profile(  {pfp, session, updateImage , point}: {pfp:string, session:any, updateImage: Function, point: number}){
     
   const [image, setImage] = useState(pfp);
 
@@ -29,17 +29,14 @@ export default function Profile(  {pfp, session, updateImage}: {pfp:string, sess
         <div className="w-[220px] h-[220px] mx-auto flex justify-center items-center ">
         
         <label htmlFor="file-upload">
-        <div className="w-[300px] h-[300px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute top-8 right-10 z-30"></div> 
+        
+        {(point>=500 && point < 1000) && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover absolute right-[50px] top-[40px] z-30"></div> }
+        {point>=1000 && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute right-[50px] top-[40px] z-30"></div>}
 
             <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200}}>
                 
              </Avatar>
 
-        {/* <Avatar src="./img/LeagueBorder1.png" sx={{ width: 220, height: 220 }} variant="square" >
-         <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200}}/>
-        </Avatar>  */}
-        
-         {/* <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200, marginLeft: "auto", marginRight: "auto" }}/> */}
         <input
             id="file-upload"
             type="file"
