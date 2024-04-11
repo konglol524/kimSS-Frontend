@@ -26,3 +26,23 @@ exports.uploadProfile = async (req, res, next) => {
       res.status(400).json({success: false, message: error.message})
     }
   };
+
+
+exports.getProfilePicture = async (req, res, next) => {
+  try {
+    const pfp = await Profile.findOne({ user : req.user.id });
+    if (!pfp) {
+      return res.status(404).json({
+        success: false,
+        message: `No profile picture for user with id ${req.params.id}`,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: pfp
+    })
+  } catch (error) {
+    res.status(400).json({success: false, message: error.message});
+  }
+}
