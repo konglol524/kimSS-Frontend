@@ -44,10 +44,6 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    profilePic : {
-      type: String,
-      default: "",
-    }
   },
   { id: true }
 );
