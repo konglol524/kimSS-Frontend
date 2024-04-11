@@ -7,7 +7,7 @@ import CarSelect from "./CarSelect";
 import DateReserve from "./DateReserve";
 import { TextField } from "@mui/material";
 import addBooking from "@/libs/addBooking";
-import getUserProfile from "@/libs/getUserProfile"; // Import the getUserProfile function
+import getUserProfile from "@/libs/getUserProfile"; 
 import ReservationResult from "./ReservationResult";
 import { useRouter, useSearchParams } from "next/navigation";
 import Loading from "./CustomLoading";
@@ -38,8 +38,8 @@ export default function BookingForm({
   );
   const [daySpend, setDaySpend] = useState<number>(1);
   const [discount, setDiscount] = useState<number>(0);
-  const [newUser, setNewUser] = useState<any>(user); // State to hold the updated user profile
-  const [isLoading, setIsLoading] = useState<boolean>(true); // State to manage loading status
+  const [newUser, setNewUser] = useState<any>(user);  
+  const [isLoading, setIsLoading] = useState<boolean>(true); 
 
   const currentCostPerDay =
     shops.data.find((rental: rentalProvider) => rental._id === selectedShop)
@@ -50,9 +50,9 @@ export default function BookingForm({
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const updatedUser = await getUserProfile(user.token); // Fetch updated user profile
-        setNewUser(updatedUser); // Update state with updated user profile
-        setIsLoading(false); // Set loading state to false after fetching user profile
+        const updatedUser = await getUserProfile(user.token); 
+        setNewUser(updatedUser);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -98,7 +98,7 @@ export default function BookingForm({
         text: "Created reservation successfully",
       });
 
-      // Update user profile points after submitting
+      
       try {
         const updatedUser = await getUserProfile(user.token);
         setNewUser(updatedUser);
@@ -106,7 +106,7 @@ export default function BookingForm({
         console.error("Error fetching user profile:", error);
       }
 
-      // Show points notification
+      
       setTimeout(() => {
         handleSubmitResponse({
           success: true,
@@ -159,7 +159,7 @@ export default function BookingForm({
           } else return obj;
         });
       });
-    }, 500); // Adjust this duration as needed
+    }, 500); 
 
     setTimeout(() => {
       setResponseChildren((prevChildren) => {
@@ -169,7 +169,7 @@ export default function BookingForm({
           } else return obj;
         });
       });
-    }, 2000); // Adjust this duration as needed
+    }, 2000); 
 
     setTimeout(() => {
       setResponseChildren((prevChildren) => {
@@ -177,11 +177,11 @@ export default function BookingForm({
       });
 
       router.refresh();
-    }, 3000); // Adjust this duration as needed
+    }, 3000); 
   };
 
   const maxDiscount = Math.min(
-    newUser.data.point, // Use updated user profile points
+    newUser.data.point, 
     (currentCostPerDay * daySpend) / 10
   );
 
