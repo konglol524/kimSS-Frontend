@@ -139,7 +139,7 @@ export default function BookingList({
                   <th className="text-sm">bookingDate</th>
                   <th className="text-sm">daySpend</th>
                   <th className="text-sm">Provider</th>
-                  <th className="text-sm">Cost Per Day</th>
+                  <th className="text-sm">Cost</th>
                 </tr>
               </thead>
               <tbody>
