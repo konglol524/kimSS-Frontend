@@ -1,8 +1,9 @@
 const User = require("../models/User");
 
 exports.uploadProfile = async (req, res, next) => {
+    // console.log(req.body)
     const pic = req.body.pic;
-    console.log(pic);
+    // console.log(pic);
     let updateData = req.user;
     updateData.profilePic = pic;
     console.log(updateData);
