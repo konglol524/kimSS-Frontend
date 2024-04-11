@@ -17,6 +17,7 @@ connectDB();
 const rentals = require("./routes/rentals");
 const auth = require("./routes/auth");
 const bookings = require("./routes/bookings");
+const upload = require("./routes/upload");
 
 var corsOptions = {
   origin: process.env.HOST,
@@ -33,7 +34,7 @@ const cors = require("cors");
 // app.use(cors({ origin: process.env.FRONTEND_URL }));
 app.use(cors());
 // app.use(cors());
-app.options('*', cors());
+// app.options('*', cors());
 app.use(mongoSanitize());
 //add body parser
 app.use(express.json());
@@ -52,6 +53,7 @@ app.use(hpp());
 app.use("/api/v1/rentals", rentals);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/bookings", bookings);
+app.use("/api/v1/upload", upload)
 
 //Cookie parser
 app.use(cookieParser());
