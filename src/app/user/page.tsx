@@ -41,8 +41,8 @@ export default async function user() {
             <div className="card w-96 bg-base-100 shadow-xl border-2 border-solid border-base-800 ">
               <div className="card-body">
                 <h2 className="card-title">{profile.data.name}</h2>
-                <Profile session={session} pfp={pfp.data.profilePic || "/img/defaultUser2.png"} updateImage={updateImage} point={profile.data.point}/>
-                {!pfp && <h2 className=" font-bold">[Click icon to upload profile picture]</h2>}
+                <Profile session={session} pfp={pfp.data.profilePic} updateImage={updateImage} point={profile.data.point}/>
+                {(pfp.data.profilePic === "/img/defaultUser2.png") && <h2 className=" font-bold mt-3">[Click icon to upload profile picture]</h2>}
                 <table className="border-separate table-auto border-spacing-2  ">
                   <tbody>
                     

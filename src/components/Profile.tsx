@@ -24,19 +24,16 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
         })
       }
       
-      // console.log(pfp);
       return(
-        <div className="w-[220px] h-[220px] mx-auto flex justify-center items-center ">
+  
         
-        <label htmlFor="file-upload">
+        <label htmlFor="file-upload" className="w-[220px] h-[220px] grid grid-cols-1 place-items-center mx-auto">
         
-        {(point>=500 && point < 1000) && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover absolute right-[50px] top-[40px] z-30"></div> }
-        {point>=1000 && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute right-[50px] top-[40px] z-30"></div>}
+        {(point>=500 && point < 1000) && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover absolute left-15 z-30"></div> }
+        {point>=1000 && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute left-15 z-30"></div>}
 
-            <Avatar alt="Profile picture" src={image || "/img/defaultUser2.png" } sx={{ width: 200, height: 200}}>
-                
-             </Avatar>
-
+            <Avatar alt="Profile picture" src={image} sx={{ width: 200, height: 200}}/>
+            
         <input
             id="file-upload"
             type="file"
@@ -76,14 +73,10 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
                     }
                     
                 }
-                // const newImage = await updateImage();
-                // setImage(newImage.data.profilePic);
-
             }}
         />
         </label>     
         
-        </div>   
       )
 
 }
