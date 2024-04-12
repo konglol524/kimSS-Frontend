@@ -97,7 +97,7 @@ export default function BookingForm({
         daySpend: daySpend,
         rentalProvider: selectedShop,
         discountPoint: discount,
-        addedPoint: Math.floor((currentCostPerDay * daySpend) / 100),
+        addedPoint: discount > 0 ? 0 : Math.floor((currentCostPerDay * daySpend) / 100),
         cost: estimatedCost,
       });
 
@@ -118,9 +118,9 @@ export default function BookingForm({
       setTimeout(() => {
         handleSubmitResponse({
           success: true,
-          text: `You received ${Math.floor(
+          text: `You received ${discount > 0 ? "0 point" : Math.floor(
             (currentCostPerDay * daySpend) / 100
-          )} points`,
+          ) + " points"}`,
         });
       }, 3000);
     } else {
@@ -198,7 +198,7 @@ export default function BookingForm({
       {isLoading ? (
         <Loading/>
       ) : (
-        <div className="relative items-center bg-base-100 h-[660px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
+        <div className="relative items-center bg-base-100 h-[680px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
           <form
             onSubmit={(e) => submitReservation(e)}
             className="pt-[35px] h-full"
@@ -259,9 +259,10 @@ export default function BookingForm({
                   <td className="text-left pl-5">
                     <div className="text-xl font-bold ml-5">Discount</div>
                   </td>
-                  <td className="p-[15px] ">
-                    <label htmlFor="discount">Your point is :</label>
-                    {newUser.data.point + "        "} {/* Use updated user profile points */}
+                  <td className="p-[15px]">
+                    <label htmlFor="discount" className="pr-5">Your point balance is : 
+                    {` ${newUser.data.point}`} {/* Use updated user profile points */}
+                    </label>
                     <input
                       value={discount}
                       min={0}
@@ -278,10 +279,10 @@ export default function BookingForm({
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-left pl-5">
+                  <td className="pt-[15px] text-left pl-5">
                     <div className="text-xl font-bold ml-5">Estimated Cost</div>
                   </td>
-                  <td className="p-[15px] ">
+                  <td className="pt-[15px]">
                     <div className="text-xl text-center w-full items-center flex justify-center rounded-md h-[1.75em]">
                       <span
                         className={`${
@@ -305,20 +306,23 @@ export default function BookingForm({
                 <tr>
                   <td></td>
                   <td className=" text-center text-gray-500 mt-1">
-                    You will get{" "}
+                    You will get
                     <span className="text-red-500 font-bold">
-                      {Math.floor((currentCostPerDay * daySpend) / 100)}
-                    </span>{" "}
-                    points
+                      {` ${discount > 0 ? 0 : Math.floor((currentCostPerDay * daySpend) / 100)} `}
+                    </span>
+                    {discount > 0 ? "point":"points"}
+                    <div>
+                      {discount > 0 ? "(can't earn points if discount is used)" : null}
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <button className="transition mb-[45px] hover:scale-110 hover:shadow-2xl absolute bottom-0 left-[50%] -translate-x-1/2 ml-auto text-2xl rounded-md bg-red-500 hover:bg-red-800 px-8 py-[2%] shadow-sm text-white">
+            <button className="transition mb-[70px] hover:scale-110 hover:shadow-2xl absolute bottom-0 left-[50%] -translate-x-1/2 ml-auto text-2xl rounded-md bg-red-500 hover:bg-red-800 px-8 py-[2%] shadow-sm text-white">
               Submit
             </button>
-            <div className=" text-gray-500 absolute bottom-0 left-1/2  -translate-x-1/2 text-center">
-              Points are calculated based on the original cost divided by 100
+            <div className=" text-gray-500 absolute bottom-0 left-1/2  -translate-x-1/2 text-center pb-2">
+              Points are calculated based on the original cost divided by 100.
             </div>
           </form>
         </div>

@@ -35,6 +35,7 @@ export default async function user() {
 
   return (
     <>
+    <Suspense fallback={<Loading></Loading>}>
         {session && (
           <main className="mt-[70px] flex justify-center ">
 
@@ -72,7 +73,7 @@ export default async function user() {
           </main>
         )}
       
-      <Suspense fallback={<Loading></Loading>}>
+      
         <BookingList bookings={bookings} token={session?.user.token} />
       </Suspense>    
     </>

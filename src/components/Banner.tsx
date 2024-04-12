@@ -35,7 +35,7 @@ export default function Banner() {
       ) : null}
       <Link
         href="/reservation"
-        className="w-fit absolute left-0 right-0 bottom-[22vh] md:bottom-0 mb-10 mx-auto md:ml-auto md:mr-10"
+        className="w-fit absolute left-0 right-0 bottom-[0vh] md:bottom-0 mb-10 mx-auto md:ml-auto md:mr-10"
       >
           <button className="btn btn-outline btn-error btn-lg p-5 font-bold bg-black bg-opacity-50">
             Make Your Reservation
