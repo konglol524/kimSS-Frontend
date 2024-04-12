@@ -198,7 +198,7 @@ export default function BookingForm({
       {isLoading ? (
         <Loading/>
       ) : (
-        <div className="relative items-center bg-base-100 h-[680px] w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl">
+        <div className="relative items-center bg-base-100 h-fit w-[300px] sm:w-[500px] md:w-[600px] m-auto rounded-xl flex">
           <form
             onSubmit={(e) => submitReservation(e)}
             className="pt-[35px] h-full"
@@ -207,7 +207,7 @@ export default function BookingForm({
               <tbody>
                 <tr>
                   <td className="text-left pl-5">
-                    <div className="text-xl font-bold ml-5">Select Shop</div>
+                    <div className="text-md sm:text-xl font-bold ml-5">Select Shop</div>
                   </td>
                   <td className="p-[15px]">
                     <ShopSelect
@@ -219,7 +219,7 @@ export default function BookingForm({
                 </tr>
                 <tr>
                   <td className="text-left pl-5">
-                    <div className="text-xl font-bold ml-5">Select Car</div>
+                    <div className="text-md sm:text-xl font-bold ml-5">Select Car</div>
                   </td>
                   <td className="p-[15px]">
                     <CarSelect
@@ -231,7 +231,7 @@ export default function BookingForm({
                 </tr>
                 <tr>
                   <td className="text-left pl-5">
-                    <div className="text-xl font-bold ml-5">
+                    <div className="text-md sm:text-xl font-bold ml-5">
                       Select Pickup Date
                     </div>
                   </td>
@@ -243,21 +243,21 @@ export default function BookingForm({
                 </tr>
                 <tr>
                   <td className="text-left pl-5">
-                    <div className="text-xl font-bold ml-5">Days Duration</div>
+                    <div className="text-md sm:text-xl font-bold ml-5">Days Duration</div>
                   </td>
                   <td className="p-[15px]">
                     <input
                       min={1}
                       value={daySpend}
                       type="number"
-                      className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid"
+                      className="md:w-[100px] w-[50px] text-lg text-center bg-white border rounded-md h-[3em]  text-black border-black border-solid"
                       onChange={(e) => setDaySpend(parseInt(e.target.value))}
                     />
                   </td>
                 </tr>
                 <tr>
                   <td className="text-left pl-5">
-                    <div className="text-xl font-bold ml-5">Discount</div>
+                    <div className="text-md sm:text-xl font-bold ml-5">Discount</div>
                   </td>
                   <td className="p-[15px]">
                     <label htmlFor="discount" className="pr-5">Your point balance is : 
@@ -269,7 +269,7 @@ export default function BookingForm({
                       max={maxDiscount}
                       type="number"
                       id="discount"
-                      className="md:w-[100px] text-lg text-center bg-white border rounded-md h-[3em] w-[15vw] text-black border-black border-solid"
+                      className="md:w-[100px] w-[50px] text-lg text-center bg-white border rounded-md h-[3em] text-black border-black border-solid"
                       onChange={(e) => {
                         if (+e.target.value < 0 || +e.target.value > maxDiscount)
                           return;
@@ -280,7 +280,7 @@ export default function BookingForm({
                 </tr>
                 <tr>
                   <td className="pt-[15px] text-left pl-5">
-                    <div className="text-xl font-bold ml-5">Estimated Cost</div>
+                    <div className="text-md sm:text-xl font-bold ml-5">Estimated Cost</div>
                   </td>
                   <td className="pt-[15px]">
                     <div className="text-xl text-center w-full items-center flex justify-center rounded-md h-[1.75em]">
@@ -318,10 +318,10 @@ export default function BookingForm({
                 </tr>
               </tbody>
             </table>
-            <button className="transition mb-[70px] hover:scale-110 hover:shadow-2xl absolute bottom-0 left-[50%] -translate-x-1/2 ml-auto text-2xl rounded-md bg-red-500 hover:bg-red-800 px-8 py-[2%] shadow-sm text-white">
+            <button className="transition my-2 hover:scale-110 hover:shadow-2xl  ml-auto text-2xl rounded-md bg-red-500 hover:bg-red-800 px-8 py-[2%] shadow-sm text-white">
               Submit
             </button>
-            <div className=" text-gray-500 absolute bottom-0 left-1/2  -translate-x-1/2 text-center pb-2">
+            <div className=" text-gray-500  text-center pb-2">
               Points are calculated based on the original cost divided by 100.
             </div>
           </form>
