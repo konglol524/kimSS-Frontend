@@ -260,7 +260,7 @@ export default function BookingForm({
                     <div className="text-xl font-bold ml-5">Discount</div>
                   </td>
                   <td className="p-[15px]">
-                    <label htmlFor="discount" className="pr-5">Your current points is : 
+                    <label htmlFor="discount" className="pr-5">Your point balance is : 
                     {` ${newUser.data.point}`} {/* Use updated user profile points */}
                     </label>
                     <input
