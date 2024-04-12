@@ -19,7 +19,7 @@ export default async function TopMenu() {
         <TopMenuItem title="Shop catalogs" item="Shops" pageRef="/shops" />
       </div>
       <div className="flex flex-row mr-3 sm:mr-0">
-        <Theme/>
+        <Theme />
         
         <TopMenuItem
           title="Home page"

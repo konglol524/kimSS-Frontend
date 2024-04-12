@@ -8,7 +8,7 @@ export default function Theme() {
   }, []);
 
   return (
-    <label className="swap swap-rotate text-white w-[10vw] sm:w-[140px]">
+    <label className="swap swap-rotate text-white w-[10vw] sm:w-[20vw]">
       {/* this hidden checkbox controls the state */}
       <input type="checkbox" className="theme-controller" value="sunset" />
 
