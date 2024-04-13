@@ -16,10 +16,10 @@ export default function Banner() {
         className="object-cover"
       />
       <div className="relative top-[100px] z-20 text-center">
-        <h1 className="text-5xl font-semibold text-white bg-black/[.50] p-3 w-fit mx-auto rounded-md mb-3">
-          BanDekDek Car Rental
+        <h1 className="text-2xl sm:text-5xl font-semibold text-white bg-black/[.50] p-2 w-fit mx-auto rounded-md mb-3">
+          Car Rental by DekBanJarnKim
         </h1>
-        <h3 className="text-2xl font-serif text-white  bg-black/[.50] p-2 w-fit mx-auto rounded-md">
+        <h3 className="text-lg sm:text-2xl font-serif text-white  bg-black/[.50] p-2 w-fit mx-auto rounded-md">
           Come rent your car today
         </h3>
       </div>
@@ -35,7 +35,7 @@ export default function Banner() {
       ) : null}
       <Link
         href="/reservation"
-        className="w-fit absolute left-0 right-0 bottom-[0vh] md:bottom-0 mb-10 mx-auto md:ml-auto md:mr-10"
+        className="w-fit absolute left-0 right-0 bottom-[5vh] md:bottom-0 mb-10 mx-auto md:ml-auto md:mr-10"
       >
           <button className="btn btn-outline btn-error btn-lg p-5 font-bold bg-black bg-opacity-50">
             Make Your Reservation

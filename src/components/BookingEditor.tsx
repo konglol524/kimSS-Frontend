@@ -22,6 +22,30 @@ const cars: Car[] = [
 
 export default function BookingEditor({item, form, handleChange, setForm}:{item: Booking, form:Booking, handleChange:Function, setForm:Function}){
 
+    const [totalCost, setTotalCost] = useState(
+        (item.daySpend * item.rentalProvider.cost) - 10 * item.discountPoint
+    );
+
+    useEffect(() => {
+        // Function to recalculate total value whenever dependent attributes change
+        const calculateTotalValue = () => {
+          const newValue = (form.daySpend * form.rentalProvider.cost) - (10 * form.discountPoint);
+          setTotalCost(newValue);
+          setForm({
+            ...form,
+            cost: newValue,
+            });
+        };
+    
+        // Call the function initially and whenever dependent attributes change
+        calculateTotalValue();
+    
+        // Clean-up function for useEffect
+        return () => {
+          // Any clean-up code if needed
+        };
+      }, [form.daySpend]);
+
     return (
             <div className="">
                 <div className="card card-compact w-96 bg-base-100 shadow-xl">
@@ -120,10 +144,7 @@ export default function BookingEditor({item, form, handleChange, setForm}:{item:
                     />
                     <label>Total Cost (after discount)</label>
                     <input
-                        value={
-                        item.daySpend * item.rentalProvider.cost -
-                        10 * item.discountPoint
-                        }
+                        value={totalCost}
                         className="px-4 py-2 border-2 rounded-md focus:outline-none focus:border-blue-500  bg-black text-white"
                     />
                     </div>

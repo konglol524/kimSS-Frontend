@@ -132,7 +132,9 @@ export default function BookingList({
                 {bookings.data.map((item: Booking, idx) => (
                   <tr key={idx}>
                     <th className="">{idx + 1}</th>
-                    {editID === item._id ? <BookingEditor item={item} form={form} handleChange={handleChange} setForm={setForm}/> : (
+                    {editID === item._id ? 
+                    <BookingEditor item={item} form={form} handleChange={handleChange} setForm={setForm}/> 
+                    : (
                       <>
                         <td className="whitespace-nowrap">{item.user}</td>
                         <td className="whitespace-nowrap">{item.car}</td>

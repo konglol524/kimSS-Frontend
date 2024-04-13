@@ -7,7 +7,7 @@ import { authOptions } from '@/libs/auth'
 
 
 export const metadata: Metadata = {
-  title: 'Car Rental by Bandekdek',
+  title: 'Car Rental by DekBanJarnKim',
   description: '',
 }
 
