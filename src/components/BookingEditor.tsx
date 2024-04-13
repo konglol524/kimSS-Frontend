@@ -98,31 +98,35 @@ export default function BookingEditor({item, form, handleChange, setForm}:{item:
                     <input
                         min={1}
                         value={
-                        form.daySpend !== 0
+                        form.daySpend !== 1
                             ? form.daySpend
                             : item.daySpend
                         }
-                        onChange={(e) => {
-                        if (+e.target.value < 1 && e.target.value)
-                            return;
-                        e.target.value = Math.floor(
-                            +e.target.value
-                        ).toString();
-                        handleChange(e);
-                        }}
                         type="number"
                         placeholder="daySpend..."
                         name="daySpend"
                         className="px-4 py-2 border-2 rounded-md focus:outline-none focus:border-blue-500"
+                
+                        onChange={(e) => {
+                            if(!e.target.value){
+                                return;
+                            }
+                            if (+e.target.value < 1 && e.target.value)
+                                return;
+                            e.target.value = Math.floor(
+                                +e.target.value
+                            ).toString();
+                            handleChange(e);
+                        }}                        
                     />
                     <label>Provider</label>
                     <input
+                        readOnly
                         value={
                         form.rentalProvider.name !== ""
                             ? form.rentalProvider.name
                             : item.rentalProvider.name
                         }
-                        onChange={(e) => handleChange(e)}
                         type="text"
                         placeholder="Provider..."
                         name="Provider"
@@ -130,13 +134,13 @@ export default function BookingEditor({item, form, handleChange, setForm}:{item:
                     />
                     <label>Cost Per Day</label>
                     <input
+                        readOnly
                         min={0}
                         value={
                         form.rentalProvider.cost !== 0
                             ? form.rentalProvider.cost
                             : item.rentalProvider.cost
                         }
-                        onChange={(e) => handleChange(e)}
                         type="number"
                         placeholder="cost..."
                         name="cost"
@@ -144,6 +148,7 @@ export default function BookingEditor({item, form, handleChange, setForm}:{item:
                     />
                     <label>Total Cost (after discount)</label>
                     <input
+                        readOnly
                         value={totalCost}
                         className="px-4 py-2 border-2 rounded-md focus:outline-none focus:border-blue-500  bg-black text-white"
                     />

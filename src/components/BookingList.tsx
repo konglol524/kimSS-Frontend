@@ -23,7 +23,7 @@ export default function BookingList({
     bookingDate: "",
     user: "",
     car: "",
-    daySpend: 0,
+    daySpend: 1,
     rentalProvider: {
       _id: "",
       picture: "",
@@ -66,7 +66,7 @@ export default function BookingList({
       bookingDate: "",
       user: "",
       car: "",
-      daySpend: 0,
+      daySpend: 1,
       rentalProvider: {
         _id: "",
         picture: "",
