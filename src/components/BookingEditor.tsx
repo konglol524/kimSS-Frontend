@@ -29,7 +29,10 @@ export default function BookingEditor({item, form, handleChange, setForm}:{item:
     useEffect(() => {
         // Function to recalculate total value whenever dependent attributes change
         const calculateTotalValue = () => {
-          const newValue = (form.daySpend * form.rentalProvider.cost) - (10 * form.discountPoint);
+          let newValue = (form.daySpend * form.rentalProvider.cost) - (10 * form.discountPoint);
+          if(newValue < 0){
+            newValue = 0;
+          }
           setTotalCost(newValue);
           setForm({
             ...form,
