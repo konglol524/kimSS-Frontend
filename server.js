@@ -18,7 +18,8 @@ const rentals = require("./routes/rentals");
 const auth = require("./routes/auth");
 const bookings = require("./routes/bookings");
 const upload = require("./routes/upload");
-const promotion = require("./routes/promotion");
+const promotions = require("./routes/promotions");
+const feedbacks = require("./routes/feedbacks");
 
 var corsOptions = {
   origin: process.env.HOST,
@@ -55,7 +56,8 @@ app.use("/api/v1/rentals", rentals);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/bookings", bookings);
 app.use("/api/v1/upload", upload);
-app.use("/api/v1/promotions", promotion);
+app.use("/api/v1/promotions", promotions);
+app.use("/api/v1/feedbacks", feedbacks);
 
 
 //Cookie parser

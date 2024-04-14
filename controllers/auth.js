@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Booking = require("../models/Booking");
+const Feedback = require("../models/Feedback");
 
 exports.register = async (req, res, next) => {
   try {
@@ -90,6 +91,8 @@ exports.deleteUser = async (req, res, next) => {
     }
     //!Cascade Booking
     await Booking.deleteMany({ user: user._id });
+    //Casecade Feedback
+    await Feedback.deleteMany({ user: user._id });
 
     res.status(200).json({ success: true, data: {} });
   } catch (err) {

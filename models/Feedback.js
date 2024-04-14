@@ -5,11 +5,13 @@ const FeedbackSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
         default: "",
+        required: true,
     },
     promotion: {
         type: mongoose.Schema.ObjectId,
         ref: "Promotion",
         default: "",
+        required: true,
       },
     comment: {
         type: String,
