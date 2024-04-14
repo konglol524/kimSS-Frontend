@@ -34,6 +34,14 @@ exports.addPromotion = async(req, res, next) => {
     }
 }
 
+/**
+ * Format for request
+ * POST  {{URL}}/api/v1/promotions/
+ * {
+    "name":"Tanza Winter Sale",
+    "rentals": [65deed7c9363d26fdca9b715]
+    }
+ */
 
 //deleting promotion cascade to feedback and also delete its promotionID from rentals
  exports.deletePromotion = async(req, res, next) => {
@@ -72,3 +80,8 @@ exports.addPromotion = async(req, res, next) => {
         return res.status(500).json({success: false, message: "can not delete promotion"})
     }
  }
+
+ /**
+ * Format for request
+ *  {{URL}}/api/v1/promotions/{{promoID}}
+ */
