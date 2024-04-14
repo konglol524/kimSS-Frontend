@@ -22,6 +22,11 @@ const RentalSchema = new mongoose.Schema(
       minlength: [12, "Telephone number must be exactly 12 characters long"],
       maxlength: [12, "Telephone number must be exactly 12 characters long"],
     },
+    promotions: [{
+      type: mongoose.Schema.ObjectId,
+      ref: "Promotion",
+      default: "",
+    }]
   },
   {
     toJSON: { virtuals: true },
