@@ -2,7 +2,47 @@ const Rental = require("../models/Rental");
 const Promotion = require("../models/Promotion");
 const Feedback = require("../models/Feedback");
 
+//get all promotions
+/*
+Format for request
+GET {{URL}}/api/v1/promotions/
+*/
+exports.getPromotions = async(req, res, next) => {
+    try {
+        const promos = await Promotion.find();
+        res.status(200).json({success:true, data:promos});
+    } catch (error) {
+        console.log(error.stack);
+        return res.status(500).json({success: false, message: "can not get promotions"});
+    }
+}
+
+
+//get single promotion using promotion's ID
+/*
+Format for request
+GET {{URL}}/api/v1/promotions/{{promoID}}
+*/
+exports.getPromotion = async(req, res, next) => {
+    try {
+        const promo = await Promotion.findById(req.params.id);
+        res.status(200).json({success:true, data:promo});
+    } catch (error) {
+        console.log(error.stack);
+        return res.status(500).json({success: false, message: "can not get promotion"});
+    }
+}
+
+
 //creating a promotion also updates the shop referenced to include the promotion in it
+/**
+ * Format for request
+ * POST  {{URL}}/api/v1/promotions/
+ * {
+    "name":"Tanza Winter Sale",
+    "rentals": [65deed7c9363d26fdca9b715, 65e300e320ed58b8b48c714c]
+    }
+ */
 exports.addPromotion = async(req, res, next) => {
     try {
         const promotion = await Promotion.create(req.body);
@@ -34,17 +74,14 @@ exports.addPromotion = async(req, res, next) => {
     }
 }
 
-/**
- * Format for request
- * POST  {{URL}}/api/v1/promotions/
- * {
-    "name":"Tanza Winter Sale",
-    "rentals": [65deed7c9363d26fdca9b715]
-    }
- */
+
 
 //deleting promotion cascade to feedback and also delete its promotionID from rentals
- exports.deletePromotion = async(req, res, next) => {
+ /**
+ * Format for request
+ *  DEL {{URL}}/api/v1/promotions/{{promoID}}
+ */
+exports.deletePromotion = async(req, res, next) => {
     try {
         const promo = await Promotion.findByIdAndDelete(req.params.id);
         if(!promo){
@@ -81,7 +118,4 @@ exports.addPromotion = async(req, res, next) => {
     }
  }
 
- /**
- * Format for request
- *  {{URL}}/api/v1/promotions/{{promoID}}
- */
+ 
