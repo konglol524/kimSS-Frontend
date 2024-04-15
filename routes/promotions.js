@@ -1,7 +1,9 @@
 const express = require("express");
 const {
     addPromotion,
-    deletePromotion
+    deletePromotion,
+    getPromotions,
+    getPromotion
 } = require("../controllers/promotions");
 
 //Include other recource routers
@@ -13,9 +15,11 @@ const { protect, authorize } = require("../middleware/auth");
 
 router
   .route("/")
-  .post(protect, authorize("admin"), addPromotion);
+  .post(protect, authorize("admin"), addPromotion)
+  .get(getPromotions);
 router
   .route("/:id")
   .delete(protect, authorize("admin"), deletePromotion)
+  .get(getPromotion);
 
 module.exports = router;
