@@ -41,6 +41,8 @@ exports.getPromotion = async(req, res, next) => {
  * {
     "name":"Tanza Winter Sale",
     "rentals": [65deed7c9363d26fdca9b715, 65e300e320ed58b8b48c714c]
+    "promoType": "Percent"
+    "promoNum": 5
     }
  */
 exports.addPromotion = async(req, res, next) => {
