@@ -72,8 +72,8 @@ export default async function user() {
             </div>
           </main>
         )}
-      
-      
+        
+        
         <BookingList bookings={bookings} token={session?.user.token} />
       </Suspense>    
     </>
