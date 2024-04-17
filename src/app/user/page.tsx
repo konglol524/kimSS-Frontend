@@ -40,10 +40,10 @@ export default async function user() {
           <main className="mt-[70px] flex justify-center ">
 
             <div className="card w-96 bg-base-100 shadow-xl border-2 border-solid border-base-800 ">
-              <div className="card-body">
-                <h2 className="card-title">{profile.data.name}</h2>
+              <div className="card-body p-0">
+                <h2 className="card-title ml-8 mt-6">{profile.data.name}</h2>
                 <Profile session={session} pfp={pfp.data.profilePic} updateImage={updateImage} point={profile.data.point}/>
-                {(pfp.data.profilePic === "/img/defaultUser2.png") && <h2 className=" font-bold mt-3">[Click icon to upload profile picture]</h2>}
+                {(pfp.data.profilePic === "/img/defaultUser2.png") && <h2 className=" font-extrabold text-[1.05rem] text-nowrap p-2 text-center w-full flex justify-center mt-5 text-green-600">[Click icon to upload profile picture]</h2>}
                 <table className="border-separate table-auto border-spacing-2  ">
                   <tbody>
                     
@@ -66,7 +66,7 @@ export default async function user() {
                   </tbody>
                 </table>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary">{profile.data.role}</button>
+                  <button className="btn btn-primary mr-8 mb-8">{profile.data.role}</button>
                 </div>
               </div>
             </div>

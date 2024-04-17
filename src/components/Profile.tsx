@@ -27,10 +27,14 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
       return(
   
         
-        <label htmlFor="file-upload" className="w-[220px] h-[220px] grid grid-cols-1 place-items-center mx-auto">
+        <label htmlFor="file-upload" className="w-[220px] h-[220px] cursor-pointer grid grid-cols-1 place-items-center mx-auto">
         
-        {(point>=500 && point < 1000) && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover absolute left-15 z-30"></div> }
-        {point>=1000 && <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute left-15 z-30"></div>}
+        {
+          (point>=500 && point < 1000) ? 
+          <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover absolute z-30"/>
+          :
+          <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover absolute z-30"/>
+        }
 
             <Avatar alt="Profile picture" src={image} sx={{ width: 200, height: 200}}/>
             
