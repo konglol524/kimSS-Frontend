@@ -1,4 +1,4 @@
-Vercel : https://ban-dek-dek-frontend.vercel.app/
+
 
 # How to setup folder
 1. Create a new folder
