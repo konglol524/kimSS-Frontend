@@ -26,8 +26,8 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
       
       return(
   
-        <div className="w-full h-[250px] relative justify-center flex flex-row items-center">
-          <div className="w-auto h-full absolute flex items-center  p-2 z-30">
+        <div className="w-full h-[200px] pt-5 relative justify-center flex flex-row items-center">
+          <div className="w-auto h-full absolute flex items-center p-2 z-30 pointer-events-none">
             {
               (point>=500 && point < 1000) ? 
               <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover"/>
@@ -35,50 +35,51 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
               point >= 1000 ? <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover"/> : null
             }
           </div>
-          <div className="absolute">
-            <Avatar alt="Profile picture" src={image} sx={{ width: 200, height: 200}}/>
-            <label className="w-full h-full cursor-pointer grid grid-cols-1 justify-center mx-auto"/>
-            <input
-                  id="file-upload"
-                  type="file"
-                  name="myFile"
-                  accept=".jpeg, .png, .jpg, .webp"
-                  className="hidden"
-                  onChange={async (e)=>{
-                      e.preventDefault();
-                      if(!e.target.files){
-                          return
-                      }
-                      const file = e.target.files[0];
-                      const base64 = await convertToBase64(file);
-                      
-                      
-                      if(typeof base64 === 'string'){
-                          let image = document.createElement("img");
-                          image.src = base64;
-                          image.onload = async ({target}) => {
-                            let canvas = document.createElement("canvas");
-                            if(!target){
-                              return;
-                            }
-                            let ratio = WIDTH / (target as HTMLCanvasElement).width;
-                            canvas.width = WIDTH;
-                            canvas.height = (target as HTMLCanvasElement).height * ratio;
-                            const context = canvas.getContext("2d");
-                            context?.drawImage(image, 0, 0, canvas.width, canvas.height);
-                            let new_image_url = context?.canvas.toDataURL("image/jpeg", 60);
-                            if(!new_image_url){
-                              return;
-                            }
-                            setImage(new_image_url);
-                            const result = await uploadProfile(session.user.token, new_image_url);    
-                            console.log(result);     
+          <div className="absolute w-full h-full flex justify-center items-center">
+            <Avatar alt="Profile picture" src={image} sx={{ width: 200, height: 200}} className="absolute"/>
+            <label className="w-[200px] h-[200px] cursor-pointer grid grid-cols-1 justify-center mx-auto absolute">
+              <input
+                    id="file-upload"
+                    type="file"
+                    name="myFile"
+                    accept=".jpeg, .png, .jpg, .webp"
+                    className="hidden"
+                    onChange={async (e)=>{
+                        e.preventDefault();
+                        if(!e.target.files){
+                            return
+                        }
+                        const file = e.target.files[0];
+                        const base64 = await convertToBase64(file);
+                        
+                        
+                        if(typeof base64 === 'string'){
+                            let image = document.createElement("img");
+                            image.src = base64;
+                            image.onload = async ({target}) => {
+                              let canvas = document.createElement("canvas");
+                              if(!target){
+                                return;
+                              }
+                              let ratio = WIDTH / (target as HTMLCanvasElement).width;
+                              canvas.width = WIDTH;
+                              canvas.height = (target as HTMLCanvasElement).height * ratio;
+                              const context = canvas.getContext("2d");
+                              context?.drawImage(image, 0, 0, canvas.width, canvas.height);
+                              let new_image_url = context?.canvas.toDataURL("image/jpeg", 60);
+                              if(!new_image_url){
+                                return;
+                              }
+                              setImage(new_image_url);
+                              const result = await uploadProfile(session.user.token, new_image_url);    
+                              console.log(result);     
 
-                          }
-                          
-                      }
-                  }}
-              />
+                            }
+                            
+                        }
+                    }}
+                />
+            </label>
           </div>
         </div>
         
