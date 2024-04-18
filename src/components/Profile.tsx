@@ -30,9 +30,9 @@ export default function Profile(  {pfp, session, updateImage , point}: {pfp:stri
           <div className="w-auto h-full absolute flex items-center  p-2 z-30">
             {
               (point>=500 && point < 1000) ? 
-              <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder1.png')] bg-cover"/>
+              <div className="w-[230px] h-[230px] bg-[url('/img/ariF1.png')] bg-cover"/>
               :
-              point >= 1000 ? <div className="w-[280px] h-[280px] bg-[url('/img/LeagueBorder2.png')] bg-cover"/> : null
+              point >= 1000 ? <div className="w-[230px] h-[230px] bg-[url('/img/ariF2.png')] bg-cover"/> : null
             }
           </div>
           <div className="absolute">
