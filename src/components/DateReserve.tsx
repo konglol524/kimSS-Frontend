@@ -7,7 +7,7 @@ export default function DateReserve({onDateChange}:{onDateChange:Function}) {
     return (
         <div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker className='rounded-lg scale-[80%] bg-white' format='DD/MM/YYYY' onChange={(value)=>onDateChange(value)}/>
+                <DatePicker  className='rounded-lg scale-[80%] bg-white' format='DD/MM/YYYY' onChange={(value)=>onDateChange(value)}/>
             </LocalizationProvider>
         </div>
     )

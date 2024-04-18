@@ -211,6 +211,7 @@ export default function BookingForm({
                   </td>
                   <td className="p-[15px]">
                     <ShopSelect
+                      
                       value={selectedShop}
                       shops={shops}
                       onShopChange={(value: string) => setSelectedShop(value)}
@@ -237,6 +238,7 @@ export default function BookingForm({
                   </td>
                   <td className="p-[15px]">
                     <DateReserve
+    
                       onDateChange={(value: Dayjs) => setBookDate(value)}
                     />
                   </td>
