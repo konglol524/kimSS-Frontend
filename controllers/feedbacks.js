@@ -97,3 +97,35 @@ exports.updateFeedback = async(req, res, next) => {
 
 
 //For delete feedback, user can only delete their own feedback. Admin can delete any feedback.
+exports.deleteFeedback = async (req, res, next) => {
+    try {
+      const feedback = await Feedback.findById(req.params.id);
+  
+      if (!feedback) {
+        return res.status(404).json({
+          success: false,
+          message: `No feedback with the id of ${req.params.id}`,
+        });
+      }
+  
+      //Make sure user is the booking owner
+      if (feedback.user.toString() !== req.user.id && req.user.role !== "admin") {
+        return res.status(401).json({
+          success: false,
+          message: `User ${req.user.id} is not authorized to delete this feedback`,
+        });
+      }
+  
+      await feedback.deleteOne();
+  
+      res.status(200).json({
+        success: true,
+        data: {},
+      });
+    } catch (error) {
+      console.log(error.stack);
+      return res
+        .status(500)
+        .json({ success: false, message: "Cannot delete Feedback" });
+    }
+  };
