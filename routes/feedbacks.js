@@ -3,6 +3,7 @@ const {
     addFeedback,
     getFeedbacks,
     updateFeedback,
+    deleteFeedback,
 } = require("../controllers/feedbacks");
 
 //Include other recource routers
@@ -18,6 +19,7 @@ router
   .route("/:id")
   .get(getFeedbacks)
   .put(protect, updateFeedback)
-  .post(protect, authorize('admin', 'user'), addFeedback);
+  .post(protect, authorize('admin', 'user'), addFeedback)
+  .delete(protect, authorize('admin', 'user'), deleteFeedback);
 
 module.exports = router;
