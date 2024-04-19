@@ -1,0 +1,21 @@
+@startuml BanDekDek System Use Case Diagram
+left to right direction
+actor "User" as user 
+rectangle "Rental Car Booking System" as RentalCarBookingSystem {
+    usecase "Register" as register
+    usecase "View\nRental Provider" as viewRental
+    usecase "Manage\nBooking" as manageBooking
+    usecase "Manage\nRental Provider" as manageRental
+}
+
+user -- register
+user -- viewRental
+user -- manageBooking
+
+actor "Admin" as admin 
+register -- admin
+manageRental -- admin
+manageBooking -- admin
+viewRental -- admin
+
+@enduml
